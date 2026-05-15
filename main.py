@@ -2,8 +2,8 @@ import sqlite3
 from datetime import date
 from pathlib import Path
 from fastmcp import FastMCP
-
-DB_PATH = Path(__file__).parent / "expenses.db"
+import os
+DB_PATH = Path(os.getenv("EXPENSES_DB", Path(__file__).parent / "expenses.db"))
 
 mcp = FastMCP(name="Expense Tracker")
 
