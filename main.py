@@ -3,7 +3,13 @@ from datetime import date
 from pathlib import Path
 from fastmcp import FastMCP
 import os
-DB_PATH = Path(os.getenv("EXPENSES_DB", Path(__file__).parent / "expenses.db"))
+import aiosqlite  # Changed: sqlite3 → aiosqlite
+import tempfile
+# Use temporary directory which should be writable
+TEMP_DIR = tempfile.gettempdir()
+DB_PATH = os.path.join(TEMP_DIR, "expenses.db")
+
+print(f"Database path: {DB_PATH}")
 
 mcp = FastMCP(name="Expense Tracker")
 
